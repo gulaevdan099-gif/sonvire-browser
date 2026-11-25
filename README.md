@@ -1,14 +1,29 @@
 # Sonvire Browser
 
-**Sonvire** — быстрый, минималистичный и приватный настольный веб-браузер для Windows, созданный на базе Electron 45 (Chromium), SolidJS и Tailwind CSS v4.
+**Sonvire** — быстрый, минималистичный и приватный настольный веб-браузер для Windows 10 / 11 (x64) на базе Electron 45 (Chromium), SolidJS и Tailwind CSS v4.
 
-> **English summary:** Sonvire is a fast, privacy-focused desktop web browser for Windows x64 featuring bold native Windows DirectWrite typography, a deep Customization Studio (Dark / Obsidian Glass / Light themes, 7 accents + custom HEX picker, 5 one-click presets, Start Page gradient & custom photo wallpapers, left/right auto-hide sidebar, density & corner radii, JSON theme backup), a real Performance & Optimization Engine (Balanced / Performance / Eco modes, one-click RAM optimizer, live Chromium process telemetry, Adblock LRU hot-path cache, SQLite WAL tuning), Private tabs, Split View, built-in page/video translation, and a clean standalone portable/per-user Windows distribution (no Node.js required).
+## Скачать Sonvire Browser (Windows 10 / 11 x64)
+
+**[Перейти к последнему релизу (GitHub Releases) →](https://github.com/gulaevdan099-gif/sonvire-browser/releases/latest)**
+
+Никакого Node.js или сторонних компонентов не требуется — просто скачайте один из двух архивов:
+
+| Вариант | Что скачать на странице релиза | Как запустить |
+|---|---|---|
+| **Установщик (рекомендуется)** | `Sonvire-<версия>-win32-x64-Setup.zip` | 1. Распакуйте архив → 2. Запустите **`Install-Sonvire.cmd`** (без прав администратора) → 3. Ярлыки в «Пуске», на рабочем столе и «Приложения по умолчанию» настроятся сами |
+| **Портативная версия** | `Sonvire-<версия>-win32-x64-portable.zip` | 1. Распакуйте папку `Sonvire-<версия>-win32-x64` → 2. Запустите **`Sonvire.exe`** (для режима флешки создайте пустой файл `portable.flag` рядом с `Sonvire.exe`) |
+
+> **Если Windows SmartScreen покажет предупреждение:** для новых независимых сборок Windows может показать синее окно защиты — нажмите **«Подробнее» → «Выполнить в любом случае»**. Все архивы проверяются по `SHA256SUMS.txt`.
+>
+> **Автообновления:** после установки новые версии скачиваются автоматически быстрыми Ed25519-патчами (`~750 КБ`) в **Настройки → О браузере**. Файлы `latest.json` и `*-app-patch.zip` на GitHub скачивать вручную не нужно.
+
+> **English summary:** Sonvire is a fast, privacy-focused desktop web browser for Windows x64 featuring crisp native DirectWrite typography, a deep Customization Studio (Dark / Obsidian Glass / Light themes, 7 accents + custom HEX picker, 5 one-click presets, Start Page wallpapers, left/right auto-hide sidebar, JSON theme backup), a real Performance & Optimization Engine (Balanced / Performance / Eco modes, one-click RAM optimizer, live Chromium process telemetry, Adblock LRU cache, SQLite WAL tuning), Private tabs, Split View, built-in page/video translation, Ed25519-signed auto-updates, and a clean standalone portable/per-user Windows distribution.
 
 ---
 
 ## Основные возможности
 
-- **Плотная нативная типографика Windows DirectWrite**: чёткий, контрастный и читаемый шрифт по умолчанию (`bold`: body 560 / label 660 / heading 800, субпиксельное сглаживание DirectWrite) с настройкой насыщенности (*Обычный* / *Средний* / *Плотный*), семейства шрифтов (*Системный* / *Гротеск* / *Гуманистический* / *Моноширинный*) и масштаба интерфейса (`90%` / `100%` / `110%`).
+- **Плотная нативная типографика Windows DirectWrite**: чёткий, контрастный и читаемый шрифт по умолчанию (`bold`: body 600 / label 700 / heading 800, субпиксельное сглаживание DirectWrite на Windows 10 и Windows 11) с настройкой насыщенности (*Обычный* / *Средний* / *Плотный*), семейства шрифтов (*Системный* / *Гротеск* / *Гуманистический* / *Моноширинный*) и масштаба интерфейса (`90%` / `100%` / `110%`).
 - **Студия глубокой кастомизации**:
   - **Темы и акценты**: *Графитовая тёмная*, *Обсидиановое стекло*, *Светлая* и *Системная* темы, 7 акцентных палитр + произвольный **HEX-цвет** с автоматическим контрастом текста по WCAG, а также **5 готовых пресетов в 1 клик** и **экспорт/импорт настроек оформления в JSON**.
   - **Компоновка и форма**: плотность интерфейса (*Компактная* / *Комфортная* / *Просторная*), скругление углов (*Строгое* / *Скруглённое* / *Капсулы*), интенсивность стекла (*Выкл* / *Лёгкое* / *Насыщенное*), снижение анимаций, расположение боковой панели **слева или справа**, **автоскрытие сайдбара**, а также настройка видимости кнопок верхней панели (включая кнопку «Домой» `Alt+Home`).
@@ -48,7 +63,7 @@
 ### Проверка контрольных сумм (SHA-256)
 Сверьте хэш скачанного архива с файлом `SHA256SUMS.txt` в PowerShell:
 ```powershell
-Get-FileHash .\Sonvire-2.6.0-win32-x64-portable.zip -Algorithm SHA256
+Get-FileHash .\Sonvire-<версия>-win32-x64-portable.zip -Algorithm SHA256
 ```
 
 ---
