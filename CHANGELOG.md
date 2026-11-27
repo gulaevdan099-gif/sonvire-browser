@@ -3,6 +3,22 @@
 Все заметные изменения **Sonvire Browser** фиксируются в этом файле.
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/).
 
+## [2.6.8] — 2026-11-28
+
+Полное исправление совместимости входа в Google (`accounts.google.com` / BotGuard), OAuth-окон и современных сайтов с проверками целостности браузера (доступно как быстрый Ed25519-патч и полная сборка Windows x64).
+
+### Исправлено (Fixed)
+- **Устранена ошибка входа Google *«Couldn't sign you in — This browser or app may not be secure»***:
+  - Убрана инъекция скриптов в главный контекст на всех доменах авторизации и антибот-проверок (`accounts.google.*`, `passport.yandex.*`, `login.microsoftonline.com`, `challenges.cloudflare.com` и др.) — нативные прототипы `Navigator.prototype.userAgentData`, `PublicKeyCredential` и `CredentialsContainer.prototype` остаются на 100% нетронутыми (`[native code]`).
+  - Подавление системного окна Windows Security *«Вставьте в USB-порт ключ безопасности»* переведено с JS-патчинга на нативный механизм Chromium (`Permissions-Policy: publickey-credentials-get=(), publickey-credentials-create=()` + `WebAuthenticationConditionalUI`), с немедленным переключением через *Настройки → Приватность*.
+- **Аутентичные HTTP Client Hints (RFC 8942), HTTP/3 QUIC и `Accept-Language`**:
+  - Заголовки `Sec-CH-UA` используют точный алгоритм GREASE текущего Chromium и реальную версию Windows (`platformVersion`), обеспечивая 100% совпадение HTTP ↔ JS ↔ iframe ↔ Web Workers без подмены прототипов.
+  - Высокоэнтропийные заголовки (`Sec-CH-UA-Full-Version-List`, `Sec-CH-UA-Platform-Version` и др.) больше не отправляются без запроса — только после получения `Accept-CH` / `Critical-CH` и только по защищённому соединению.
+  - Расширен белый список доменов аттестации Google BotGuard (`jnn-pa.googleapis.com`, `waa-pa.clients6.google.com`, `clients6.google.com`, `oauth2.googleapis.com`, `www.google.com/js/bg/`, региональные `accounts.google.*`, `play.google.com/log`, а также `discord.com`, `auth0.com`, `okta.com`); заголовки `DNT` / `Sec-GPC` больше не протекают на подзапросы auth-вкладок, а `Permissions-Policy` объединяется с политикой сайта без затирания разрешений камеры/микрофона.
+  - Добавлен флаг `--disable-blink-features=AutomationControlled`, включён нативный HTTP/3 QUIC и передан стандартный `Accept-Language` (`ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7`).
+- **Полная очистка cookies сайта («cookie jail»)**:
+  - Кнопка *«Очистить cookie и данные этого сайта»* в меню замка адресной строки теперь также очищает cookies родительского домена (например, `.google.com` при очистке `accounts.google.com`) и кэш HTTP-авторизации.
+
 ## [2.6.7] — 2026-11-26
 
 Срочное исправление совместимости VPN-подписок с ограничением устройств по HWID (Remnawave / Happ / v2rayTun) и точной диагностики ответов панелей.
